@@ -4,7 +4,7 @@
 	if (!$_SESSION['UserAuthorized']) die('Bye, bye');
 	?>
 	<? 
-	
+	/*
 	require_once $_SERVER['DOCUMENT_ROOT'].'/db/v4_Places.class.php';	
 	$pl = new v4_Places();
 	
@@ -515,7 +515,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/cms/t/booking.js.php");
 
 /*
 jScript in: js/pages/booking_new.js.php
-*/
+*//*
 function fiksniDio() {
 	$term_name = GetPlaceName(s('FromID')); 
 	$dest_name = GetPlaceName(s('ToID'));
