@@ -1,4 +1,4 @@
-{**
+
 <div style="background: transparent url('./i/header/112.jpg') center fixed;
 	background-size: cover;
 	margin-top:-20px !important">
@@ -37,6 +37,7 @@
                             </select>
                         </div>
                     </div>
+                    {*
                     <div class="col s12 l2">
                         <label for="ReferenceNo"><i class="fa fa-book"></i> Agent Reference
                             Number</label><br>
