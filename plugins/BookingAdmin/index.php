@@ -122,6 +122,7 @@ function getAgents()
 								<? $agents = array(); $agents = getAgents(); ?> 
 */
 /*
+*/
 ?>
 
 <?
@@ -133,7 +134,7 @@ while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
 	$agents[] = $row;
 }
 $smarty->assign('agents', $agents);
-*/
+
 ?>
 <?/* if (s('returnTransfer') == '1') echo 'checked'; ?>
 <?
