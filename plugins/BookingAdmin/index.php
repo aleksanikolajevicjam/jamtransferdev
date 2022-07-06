@@ -13,6 +13,7 @@ foreach ($agents as $id => $name) {
 ?>
 
 <?php
+require_once ROOT . '/db/v4_AuthUsers.class.php';
 
 $db = new DataBaseMysql();
 $query = "SELECT AuthUserID, AuthUserCompany FROM v4_AuthUsers where AuthLevelID = 2;";
