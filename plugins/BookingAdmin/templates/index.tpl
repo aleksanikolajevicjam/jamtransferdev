@@ -202,14 +202,14 @@
                         </div>
                         <!-- select car button -->
 
-{*
+
                         <div class="col s12">
                             <div class="tab" id="tab_1">
                                 <div id="selectCar">
                                     <div class="col s12 center-align xwhite-text">
                                         <br>
                                         <h4>
-                                            {$PRICES_STARTING_FROM?}
+                                            {$PRICES_STARTING_FROM}
                                         </h4>
                                     </div>
 
