@@ -126,14 +126,7 @@ function getAgents()
 ?>
 
 <?
-$db = new DataBaseMysql();
-$query = "SELECT AuthUserID, AuthUserCompany FROM v4_AuthUsers where AuthLevelID = 2;";
-$result = $db->RunQuery($query);
-$agents = array();
-while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-	$agents[] = $row;
-}
-$smarty->assign('agents', $agents);
+
 
 ?>
 <?/* if (s('returnTransfer') == '1') echo 'checked'; ?>
