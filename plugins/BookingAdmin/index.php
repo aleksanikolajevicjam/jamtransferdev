@@ -12,7 +12,7 @@ foreach ($agents as $id => $name) {
 */
 ?>
 
-<?php
+<?php/*
 require_once ROOT . '/db/v4_AuthUsers.class.php';
 
 $db = new DataBaseMysql();
