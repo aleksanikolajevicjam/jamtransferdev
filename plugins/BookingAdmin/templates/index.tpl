@@ -202,7 +202,7 @@
                         </div>
                         <!-- select car button -->
 
-
+{*
                         <div class="col s12">
                             <div class="tab" id="tab_1">
                                 <div id="selectCar">
@@ -213,7 +213,7 @@
                                         </h4>
                                     </div>
 
-{*
+
                                     <div class="col s12 ucase s center xwhite-text">
                                         {$SERVICES_DESC1}
                                         {$SERVICES_DESC2}
