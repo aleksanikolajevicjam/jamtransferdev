@@ -1,4 +1,4 @@
-
+TEST
 {include file='plugins\Buking\templates\scriptsAdm.tpl'}
 
 <div style="background: transparent url('./i/header/112.jpg') center fixed; background-size: cover;
