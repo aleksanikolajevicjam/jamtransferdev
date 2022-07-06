@@ -123,7 +123,7 @@
                                    value="{$transferDate}" data-field="date">
                         </div>
                         <!-- pickup date -->
-{*
+
                         <div class="col s12 l3">
                             <br>
                             <label for="transferTime"><i class="fa fa-clock-o"></i>
@@ -202,7 +202,7 @@
                         </div>
                         <!-- select car button -->
 
-
+{*
                         <div class="col s12">
                             <div class="tab" id="tab_1">
                                 <div id="selectCar">
