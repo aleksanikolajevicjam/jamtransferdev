@@ -15,7 +15,6 @@ while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
     $agents[] = $row;
 }
 $smarty->assign('agents', $agents);
-var_dump($agents);
 ?>
 <?php/*
 foreach ($agents as $id => $name) {

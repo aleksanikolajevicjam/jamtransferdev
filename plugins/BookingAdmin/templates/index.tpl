@@ -28,10 +28,9 @@
                     <div class="col l6 s12">
                         <label for="AuthUserIDe"><i class="fa fa-globe"></i> Book as <strong>Agent</strong></label><br>
                         <div>
-                            <select name="AgentID" id="AgentID" class="xchosen-select
-									browser-default" value='{$AgentID}>
-                            <option value="0"> ---</option>
-  {section name=index loop=$agents}
+                            <select name="AgentID" id="AgentID" class="xchosen-select browser-default" value='{$AgentID}>
+                            <option value="0"> --- </option>
+                                {section name=index loop=$agents}
                                     <option value="{$agents[index].AuthUserID}">{$agents[index].AuthUserCompany}</option>
                                 {/section}
                             </select>
