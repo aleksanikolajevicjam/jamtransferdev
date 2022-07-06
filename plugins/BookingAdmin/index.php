@@ -1,9 +1,9 @@
 <?
-	$smarty->assign('page',$md->getName());	
-	@session_start();
-	if (!$_SESSION['UserAuthorized']) die('Bye, bye');
-	?>
-	<? 
+$smarty->assign('page', $md->getName());
+@session_start();
+if (!$_SESSION['UserAuthorized']) die('Bye, bye');
+?>
+<? /*
 	
 	require_once $_SERVER['DOCUMENT_ROOT'].'/db/v4_Places.class.php';	
 	$pl = new v4_Places();
@@ -60,164 +60,18 @@
    
     <!-- background div -->
 
-<script src="<? $_SERVER['DOCUMENT_ROOT'] ?>/cms/t/ztest1.js"></script>
 
-<script>
 
-	function selectJSON() {
-		$('#wref').empty();
-		var weby_key=$('#weby_key').val();
-		var param = 'weby_key='+weby_key;
-		console.log('/cms/t/selectJSON.php?'+param);
-		$.ajax({
-			type: 'GET',
-			url: '/cms/t/selectJSON.php?'+param,
-			success: function(data) {
-				if (data!=='No') 
-					$('#wref').html(data);
-				else {
-					alert ('No reservation or wrong api key');
-					$('#weby_key').prop('disabled', false);
-				}	
-			}	
-		})	
-		$('#webyblock').show(500);		
-	}	
-	$('#empty').on('click', function() {
-		$('input').each(function() {
-			$(this).attr('value', '');  
-		})
-		$('#AgentID').val(0);
-		$('#paxSelector').val(0);
-		$('#PaxFirstName').val(' ');
-		$('#PaxTel').val(' ');	
-	})	
-	$(document).ready( function () {
-		$('#webyblock').hide(500);	
-		$('#sunblock').hide(500);			
-		var aid=$('#AgentID').val();
-		if (aid==1711) selectJSON();
-		if (aid==1712) selectJSON();
-		if (aid==2123) $('#sunblock').show(500);		
-	})	
-	$('#AgentID').on('change', function() {
-		$('#webyblock').hide(500);	
-		$('#sunblock').hide(500);			
-		var aid=$('#AgentID').val();
-		if (aid==1711) selectJSON();
-		if (aid==1712) selectJSON();
-		if (aid==2123) $('#sunblock').show(500);
-	})	
-	$('#sun').on('click', function() {
-		$('#apies').hide(500);
-		$('#sunblock').show(500);	
-		$('#api').val('SUN');
-	})	
-	$('#weby_key').on('change', function() {
-		selectJSON();
-	})
-	$('#wref').on('change', function() {
-		var code = $('#wref :selected').val();
-		var weby_key=$('#weby_key').val();
-		$('#ReferenceNo').val(code);
-		if (code != '') {
-			var link  = '/cms/t/getJSON.php';
-			var param = 'code='+code+'&form='+'booking'+'&weby_key='+weby_key;
-			$.ajax({
-				type: 'POST',
-				url: link,
-				data: param,
-				async: false,
-					success: function(data) {
-						if (data=='false') alert ('Wrong reservation reference');
-						else {
-							var order = JSON.parse(data);
-							var keys = Object.keys(order);
-							keys.forEach(function(entry) {
-									var id_ch = '#'+entry;
-									$(id_ch).val(order[entry]);
-								})	
-							$('#paxSelector option').each(function() {
-								if ($(this).val() == $('#PaxNo2').val()) $(this).prop('selected', true);
-							})	
-							
-							// cekiranje povratnog transfera
-							var rt = $('#returnDate').val();		
-							if (rt != '') $('#returnTransferCheck').trigger('click');
-							//opis za povratni transfer
-							var toname2 = $('#ToName2').val();
-							$('#toname2').html(toname2);
-							
-							// dodatni opis za vozilo
-							var vehicle = $('#VehicleName2').val();
-							$('#vehiclename').html(vehicle);
-							
-						// dodavanje hotela u adrese
-						$('#PickupAddress').val(($('#SPAddressHotel').val())+' '+($('#PickupAddress').val()));
-						$('#DropAddress').val(($('#SDAddressHotel').val())+' '+($('#DropAddress').val()));
-						$('#RPickupAddress').val(($('#RPAddressHotel').val())+' '+($('#RPickupAddress').val()));
-						$('#RDropAddress').val(($('#RDAddressHotel').val())+' '+($('#RDropAddress').val()));
-						
-							$('#api').val('WEBY');
-						}
-					}
-			});	
-		}		 
-	}) 
-	
-	
-	$('#srn').on('change', function() {
-		var data = new FormData();
-		data.append('ufile', $('#srn').prop('files')[0]);
-		$.ajax({
-			type: 'POST',
-			url: '/cms/p/modules/getXML.php',
-			data: data,
-			async: false,
-			processData: false, // Using FormData, no need to process data.
-			contentType: false,
-				success: function(data) {
-					var order = JSON.parse(data);
-					var keys = Object.keys(order);
-					keys.forEach(function(entry) {
-							var id_ch = '#'+entry;
-							$(id_ch).val(order[entry]);
-						})	
-					$('#paxSelector option').each(function() {
-						if ($(this).val() == $('#PaxNo2').val()) $(this).prop('selected', true);
-					})			
-					// cekiranje povratnog transfera
-					var rt = $('#returnDate').val();		
-					if (rt != '') $('#returnTransferCheck').trigger('click');				
-					var toname2 = $('#ToName2').val();
-					$('#toname2').html(toname2);				
-					// dodatni opis za vozilo
-					var vehicle = $('#VehicleName2').val();
-					$('#vehiclename').html(vehicle);	
-					$('#api').val('SUN');
-					$('#PickupAddress').val(($('#SPAddressHotel').val())+' '+($('#PickupAddress').val()));
-					$('#DropAddress').val(($('#SDAddressHotel').val())+' '+($('#DropAddress').val()));
-					$('#RPickupAddress').val(($('#RPAddressHotel').val())+' '+($('#RPickupAddress').val()));
-					$('#RDropAddress').val(($('#RDAddressHotel').val())+' '+($('#RDropAddress').val()));
-					
-					$('#FlightNo').val(($('#FlightCo').val())+' '+($('#FlightNo').val()));
-					if ($('#FlightNo').val()==' ') $('#FlightNo').val(($('#DFlightCo').val())+' '+($('#DFlightNo').val()));					
-					$('#RFlightNo').val(($('#RFlightCo').val())+' '+($('#RFlightNo').val()));
-					if ($('#RFlightNo').val()==' ') $('#RFlightNo').val(($('#RDFlightCo').val())+' '+($('#RDFlightNo').val()));
-					if ($('#FlightTime').val()=='') $('#FlightTime').val($('#DFlightTime').val());					
-					if ($('#RFlightTime').val()=='') $('#RFlightTime').val($('#RDFlightTime').val());										
-				}
-		});
-	});
-</script>
 
 <?
-require_once($_SERVER['DOCUMENT_ROOT']."/cms/t/bookingAdmin.js.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/cms/t/booking.js.php");
+require_once("bookingAdmin.js.php");
+require_once("bookingJS.php");
 
 /*
 jScript in: js/pages/booking_new.js.php
 */
+
+/*
 function fiksniDio() {
 	$term_name = GetPlaceName(s('FromID')); 
 	$dest_name = GetPlaceName(s('ToID'));
@@ -265,3 +119,117 @@ function getAgents()
 	}
 	return $retArr;
 }
+								<? $agents = array(); $agents = getAgents(); ?> 
+*/
+/*
+?>
+
+<?/*
+$db = new DataBaseMysql();
+$query = "SELECT AuthUserID, AuthUserCompany FROM v4_AuthUsers where AuthLevelID = 2;";
+$result = $db->RunQuery($query);
+$agents = array();
+while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+	$agents[] = $row;
+}
+$smarty->assign('agents', $agents);
+?>
+<? if (s('returnTransfer') == '1') echo 'checked'; ?>
+<?
+require_once $_SERVER['DOCUMENT_ROOT'] . '/m/getRoutePrices.php';
+$car =   getRoutePrices(s('FromID'), s('ToID'));
+
+$cells =  count($car);
+
+switch ($cells) {
+	case 1:
+		$box = 'l4';
+		$offset = 'offset-l2';
+		break;
+	case 2:
+		$box = 'l3';
+		$offset = 'offset-l3';
+		break;
+	case 3:
+		$box = 'l4';
+		$offset = '';
+		break;
+	case 4:
+		$box = 'l3';
+		$offset = '';
+		break;
+	case 5:
+		$box = 'l2';
+		$offset = 'offset-l1';
+		break;
+	case 6:
+		$box = 'l2';
+		$offset = '';
+		break;
+	case 7:
+		$box = 'l3';
+		$offset = '';
+		break;
+	case 8:
+		$box = 'l3';
+		$offset = '';
+		break;
+	case 9:
+		$box = 'l3';
+		$offset = '';
+		break;
+	case 10:
+		$box = 'l2';
+		$offset = '';
+		break;
+	case 11:
+		$box = 'l3';
+		$offset = '';
+		break;
+	case 12:
+		$box = 'l2';
+		$offset = '';
+		break;
+}
+?>
+
+<?
+foreach ($car as $VehicleCapacity => $price) {
+
+	$VehicleImageRoot = "https://" . $_SERVER['HTTP_HOST'];
+
+	if ($VehicleCapacity <= 3) $vehicleImageFile = '/i/cars/sedan.png';
+	else if ($VehicleCapacity <= 4) $vehicleImageFile = '/i/cars/sedan.png';
+	else if ($VehicleCapacity <= 8) $vehicleImageFile = '/i/cars/minivan.png';
+	else if ($VehicleCapacity <= 15) $vehicleImageFile = '/i/cars/minibusl.png';
+	else if ($VehicleCapacity > 15) $vehicleImageFile = '/i/cars/bus.png';
+
+	$VehicleImage = $VehicleImageRoot . $vehicleImageFile;
+?>
+
+	<div class="col s12 <?= $offset ?>">
+
+
+		<div class="col s12  <?= $box ?>  card l">
+			<br>
+			<i class="fa fa-user"></i>
+			<?= $VehicleCapacity ?><br>
+			<img src="<?= $VehicleImage ?>" class="responsive-img" alt="taxi">
+
+			<div class="card-action">
+				<i class="fa fa-tags red-text"></i>
+				<?= $price ?>
+				<?= s('Currency') ?>
+			</div>
+		</div>
+
+	<?
+} ?>
+	</div>
+	<div class="col s12 ucase s center xwhite-text">
+		<?= SERVICES_DESC1 ?> -
+		<?= SERVICES_DESC2 ?> -
+		<?= SERVICES_DESC3 ?> -
+		<?= SERVICES_DESC4 ?> -
+		<?= SERVICES_DESC5 ?>
+	</div>
