@@ -3,14 +3,6 @@ $smarty->assign('page', $md->getName());
 @session_start();
 if (!$_SESSION['UserAuthorized']) die('Bye, bye');
 ?>
-<?php/*
-foreach ($agents as $id => $name) {
-    if ($AgentID == $id) $selected = 'selected';
-    else $selected = '';
-    echo ' <option value="' . $id . '"' . $selected . '>' . $name . '</option>';
-}
-*/
-?>
 
 <?php
 require_once ROOT . '/db/v4_AuthUsers.class.php';
@@ -23,8 +15,18 @@ while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
     $agents[] = $row;
 }
 $smarty->assign('agents', $agents);
-
+var_dump($agents);
 ?>
+<?php/*
+foreach ($agents as $id => $name) {
+    if ($AgentID == $id) $selected = 'selected';
+    else $selected = '';
+    echo ' <option value="' . $id . '"' . $selected . '>' . $name . '</option>';
+}
+*/
+?>
+
+
 <?/*
 for($i=1; $i<55; $i++) {
     echo '<option value="'.$i.'" ';
