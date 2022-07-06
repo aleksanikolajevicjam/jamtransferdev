@@ -202,7 +202,7 @@
                         </div>
                         <!-- select car button -->
 
-{*
+
                         <div class="col s12">
                             <div class="tab" id="tab_1">
                                 <div id="selectCar">
@@ -225,7 +225,7 @@
                             </div>
                             <!-- tab_1 -->
                         </div>
-
+{*
                         <input type="hidden" id="PaxNo2"
                                name="PaxNo2" value="0">
                         <input type="hidden" id="AgentName"
