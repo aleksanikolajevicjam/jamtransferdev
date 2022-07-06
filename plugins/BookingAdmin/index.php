@@ -124,7 +124,7 @@ function getAgents()
 /*
 ?>
 
-<?/*
+<?
 $db = new DataBaseMysql();
 $query = "SELECT AuthUserID, AuthUserCompany FROM v4_AuthUsers where AuthLevelID = 2;";
 $result = $db->RunQuery($query);
@@ -133,8 +133,9 @@ while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
 	$agents[] = $row;
 }
 $smarty->assign('agents', $agents);
+*/
 ?>
-<? if (s('returnTransfer') == '1') echo 'checked'; ?>
+<?/* if (s('returnTransfer') == '1') echo 'checked'; ?>
 <?
 require_once $_SERVER['DOCUMENT_ROOT'] . '/m/getRoutePrices.php';
 $car =   getRoutePrices(s('FromID'), s('ToID'));
