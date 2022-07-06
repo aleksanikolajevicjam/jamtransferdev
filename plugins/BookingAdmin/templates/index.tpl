@@ -1,3 +1,4 @@
+{**
 <div style="background: transparent url('./i/header/112.jpg') center fixed;
 	background-size: cover;
 	margin-top:-20px !important">
@@ -63,7 +64,7 @@
                             </label><br>
                             <input type="hidden" id="FromID" name="FromID" value="{$fromID}"><i
                                     class="pe-7s-car pe-lg pe-va white-text"></i>
-                            {$STARTING_FROM}{*
+                            {$STARTING_FROM}
                             <input type="text" id="FromName" name="FromName" value="{$fromName}" class="input-lg"
                                    style="width:100%" placeholder="{$SEARCH_PLACEHOLDER}"
                                    autocomplete="off">
@@ -325,3 +326,4 @@
     <br>&nbsp;
 </div>
 <!-- background div -->
+    **}
