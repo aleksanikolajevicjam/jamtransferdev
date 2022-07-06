@@ -63,7 +63,7 @@
                             </label><br>
                             <input type="hidden" id="FromID" name="FromID" value="{$fromID}"><i
                                     class="pe-7s-car pe-lg pe-va white-text"></i>
-                            {$STARTING_FROM}
+                            {$STARTING_FROM}{*
                             <input type="text" id="FromName" name="FromName" value="{$fromName}" class="input-lg"
                                    style="width:100%" placeholder="{$SEARCH_PLACEHOLDER}"
                                    autocomplete="off">
@@ -217,7 +217,6 @@
                                         {$SERVICES_DESC2}
                                         {$SERVICES_DESC3}
                                         {$SERVICES_DESC4}
-                                        {$SERVICES_DESC5}
                                     </div>
                                 </div>
                                 <div id="final" style='display: none;'>Proba</div>
