@@ -30,11 +30,7 @@
 							<select name="AgentID" id="AgentID" class="xchosen-select browser-default"
 								value="{$AgentID}">
 								<option value="0">---</option>
-								{section name=index loop=$agents}
-								<option value="{$agents[index].AuthUserID}">
-									{$agents[index].AuthUserCompany}
-								</option>
-								{/section}
+								
 							</select>
 						</div>
 					</div>
