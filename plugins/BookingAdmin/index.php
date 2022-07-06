@@ -13,8 +13,6 @@ foreach ($agents as $id => $name) {
 ?>
 
 <?php
-$agents = array();
-$agents = getAgents();
 
 $db = new DataBaseMysql();
 $query = "SELECT AuthUserID, AuthUserCompany FROM v4_AuthUsers where AuthLevelID = 2;";
