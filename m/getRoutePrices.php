@@ -71,7 +71,7 @@ function getRoutePrices($fromID, $toID) {
 						$prices[$type] = $sp;
 					}
 				}	*/			
-				
+				/*
 				
 				if(array_key_exists($type, $prices) ) {
 					if($prices[$type] > $sp) {
