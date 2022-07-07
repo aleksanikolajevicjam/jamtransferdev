@@ -19,7 +19,7 @@ $smarty->assign('agents', $agents);
 
 <?php if (s('returnTransfer') == '1') $checked = "checked";
 $smarty->assign('checked', $checked); ?>
-<?
+<?/*
 require_once ROOT . '/m/getRoutePrices.php';
 $car = getRoutePrices(s('FromID'), s('ToID'));
 $cells = count($car);
