@@ -19,16 +19,7 @@ $smarty->assign('agents', $agents);
 
 
 
-<?php
-foreach ($agents as $id => $name) {
-    if ($AgentID == $id) $selected = 'selected';
-    else $selected = '';
-    echo ' <option value="' . $id . '"' . $selected . '>' . $name . '</option>';
-}
-
-?>
-
-<?/*
+<?
 for($i=1; $i<55; $i++) {
     echo '<option value="'.$i.'" ';
     if ($PaxNo==$i) echo 'selected="selected" ';
@@ -36,7 +27,7 @@ for($i=1; $i<55; $i++) {
 }
 
 ?>
-<? if
+<?/* if
 (s('returnTransfer')=='1' ) echo 'checked' ;?>
 <?
 require_once $_SERVER['DOCUMENT_ROOT'] .
