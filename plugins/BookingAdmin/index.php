@@ -21,7 +21,7 @@ $smarty->assign('agents', $agents);
 $smarty->assign('checked', $checked); ?>
 <?
 require_once ROOT . '/m/getRoutePrices.php';
-$car = getRoutePrices(s('FromID'), s('ToID'));
+//$car = getRoutePrices(s('FromID'), s('ToID'));
 //$cells = count($car);
 /*
 switch ($cells) {
