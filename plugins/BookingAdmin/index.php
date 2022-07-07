@@ -78,7 +78,7 @@ switch ($cells) {
 
 <div class="col s12 <?= $offset ?>">
 
-    <?
+    <?/*
     foreach ($car as $VehicleCapacity =>
         $price) {
         $VehicleImageRoot = "https://" .
