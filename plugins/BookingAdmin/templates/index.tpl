@@ -1,4 +1,3 @@
-{include file="plugins/BookingAdmin/templates/scriptsAdm.tpl"}
 <div
   style="
     background: transparent url('./i/header/112.jpg') center fixed;
@@ -616,4 +615,3 @@
 	});
 </script>
 
-{include file="plugins/BookingAdmin/templates/BookingAdminJS.tpl"}
