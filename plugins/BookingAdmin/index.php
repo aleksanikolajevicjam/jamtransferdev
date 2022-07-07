@@ -117,6 +117,4 @@ switch ($cells) {
 </div>
 
 <?
-require_once "bookingAdmin.js.php";
-require_once "bookingJS.php";
 ?>
