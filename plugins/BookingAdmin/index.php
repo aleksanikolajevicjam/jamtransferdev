@@ -95,7 +95,8 @@ switch ($cells) {
         else if ($VehicleCapacity > 15)
             $vehicleImageFile = '/i/cars/bus.png';
         $VehicleImage =
-            $VehicleImageRoot . $vehicleImageFile;
+      
+        $VehicleImageRoot . $vehicleImageFile;
     ?>
         <div class="col s12 <?= $box ?> card l">
             <br>
@@ -111,5 +112,64 @@ switch ($cells) {
         </div>
 
     <?
-    } ?>
+    }  ?>
 </div>
+*/ ?>
+
+
+
+
+<?
+require_once($_SERVER['DOCUMENT_ROOT']."/cms/t/bookingAdmin.js.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/cms/t/booking.js.php");
+
+/*
+jScript in: js/pages/booking_new.js.php
+*/
+function fiksniDio() {
+	$term_name = GetPlaceName(s('FromID')); 
+	$dest_name = GetPlaceName(s('ToID'));
+
+	if ($term_name == '') $term_name = YOUR_TERM;
+	if ($dest_name == '') $dest_name = YOUR_DEST;
+
+	if ($_SESSION['language'] == 'en') {
+		$fiksni_dio = 	BOOKING_ABOUT_1 . $term_name . BOOKING_ABOUT_2 . $dest_name .
+						BOOKING_ABOUT_3 . $term_name . BOOKING_ABOUT_4 . $dest_name .
+						BOOKING_ABOUT_5 . $term_name . BOOKING_ABOUT_6 . $dest_name .
+						BOOKING_ABOUT_7 . $dest_name . BOOKING_ABOUT_8 . $term_name .
+						BOOKING_ABOUT_9 . $dest_name . BOOKING_ABOUT_10;
+	}
+
+	return $fiksni_dio;
+}
+
+function getAgents()
+{
+	global $au;
+	$retArr = array();
+	
+	$where = " WHERE AuthLevelID = '2' AND Active=1";
+	$k = $au->getKeysBy("AuthUserCompany", "asc", $where);
+	
+	if(count($k) > 0 ) {
+		foreach($k as $nn => $key) {
+			$au->getRow($key);
+		 	# Stavi TaxiSite-ove u array za kasnije
+			$retArr[$au->AuthUserID] = $au->AuthUserCompany;
+			
+		}
+	}
+	$where = " WHERE AuthLevelID = '12' AND Active=1";
+	$k = $au->getKeysBy("AuthUserCompany", "asc", $where);
+	
+	if(count($k) > 0 ) {
+		foreach($k as $nn => $key) {
+			$au->getRow($key);
+		 	# Stavi TaxiSite-ove u array za kasnije
+			$retArr[$au->AuthUserID] = $au->AuthUserCompany;
+			
+		}
+	}
+	return $retArr;
+}

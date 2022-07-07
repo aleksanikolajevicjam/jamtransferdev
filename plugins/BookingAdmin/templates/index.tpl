@@ -464,3 +464,153 @@
   <br />&nbsp;
 </div>
 <!-- background div -->
+<script src="./js/ztest.js"></script>
+
+<script>
+
+	function selectJSON() {
+		$('#wref').empty();
+		var weby_key=$('#weby_key').val();
+		var param = 'weby_key='+weby_key;
+		console.log('/cms/t/selectJSON.php?'+param);
+		$.ajax({
+			type: 'GET',
+			url: '/cms/t/selectJSON.php?'+param,
+			success: function(data) {
+				if (data!=='No') 
+					$('#wref').html(data);
+				else {
+					alert ('No reservation or wrong api key');
+					$('#weby_key').prop('disabled', false);
+				}	
+			}	
+		})	
+		$('#webyblock').show(500);		
+	}	
+	$('#empty').on('click', function() {
+		$('input').each(function() {
+			$(this).attr('value', '');  
+		})
+		$('#AgentID').val(0);
+		$('#paxSelector').val(0);
+		$('#PaxFirstName').val(' ');
+		$('#PaxTel').val(' ');	
+	})	
+	$(document).ready( function () {
+		$('#webyblock').hide(500);	
+		$('#sunblock').hide(500);			
+		var aid=$('#AgentID').val();
+		if (aid==1711) selectJSON();
+		if (aid==1712) selectJSON();
+		if (aid==2123) $('#sunblock').show(500);		
+	})	
+	$('#AgentID').on('change', function() {
+		$('#webyblock').hide(500);	
+		$('#sunblock').hide(500);			
+		var aid=$('#AgentID').val();
+		if (aid==1711) selectJSON();
+		if (aid==1712) selectJSON();
+		if (aid==2123) $('#sunblock').show(500);
+	})	
+	$('#sun').on('click', function() {
+		$('#apies').hide(500);
+		$('#sunblock').show(500);	
+		$('#api').val('SUN');
+	})	
+	$('#weby_key').on('change', function() {
+		selectJSON();
+	})
+	$('#wref').on('change', function() {
+		var code = $('#wref :selected').val();
+		var weby_key=$('#weby_key').val();
+		$('#ReferenceNo').val(code);
+		if (code != '') {
+			var link  = '/cms/t/getJSON.php';
+			var param = 'code='+code+'&form='+'booking'+'&weby_key='+weby_key;
+			$.ajax({
+				type: 'POST',
+				url: link,
+				data: param,
+				async: false,
+					success: function(data) {
+						if (data=='false') alert ('Wrong reservation reference');
+						else {
+							var order = JSON.parse(data);
+							var keys = Object.keys(order);
+							keys.forEach(function(entry) {
+									var id_ch = '#'+entry;
+									$(id_ch).val(order[entry]);
+								})	
+							$('#paxSelector option').each(function() {
+								if ($(this).val() == $('#PaxNo2').val()) $(this).prop('selected', true);
+							})	
+							
+							// cekiranje povratnog transfera
+							var rt = $('#returnDate').val();		
+							if (rt != '') $('#returnTransferCheck').trigger('click');
+							//opis za povratni transfer
+							var toname2 = $('#ToName2').val();
+							$('#toname2').html(toname2);
+							
+							// dodatni opis za vozilo
+							var vehicle = $('#VehicleName2').val();
+							$('#vehiclename').html(vehicle);
+							
+						// dodavanje hotela u adrese
+						$('#PickupAddress').val(($('#SPAddressHotel').val())+' '+($('#PickupAddress').val()));
+						$('#DropAddress').val(($('#SDAddressHotel').val())+' '+($('#DropAddress').val()));
+						$('#RPickupAddress').val(($('#RPAddressHotel').val())+' '+($('#RPickupAddress').val()));
+						$('#RDropAddress').val(($('#RDAddressHotel').val())+' '+($('#RDropAddress').val()));
+						
+							$('#api').val('WEBY');
+						}
+					}
+			});	
+		}		 
+	}) 
+	
+	
+	$('#srn').on('change', function() {
+		var data = new FormData();
+		data.append('ufile', $('#srn').prop('files')[0]);
+		$.ajax({
+			type: 'POST',
+			url: '/cms/p/modules/getXML.php',
+			data: data,
+			async: false,
+			processData: false, // Using FormData, no need to process data.
+			contentType: false,
+				success: function(data) {
+					var order = JSON.parse(data);
+					var keys = Object.keys(order);
+					keys.forEach(function(entry) {
+							var id_ch = '#'+entry;
+							$(id_ch).val(order[entry]);
+						})	
+					$('#paxSelector option').each(function() {
+						if ($(this).val() == $('#PaxNo2').val()) $(this).prop('selected', true);
+					})			
+					// cekiranje povratnog transfera
+					var rt = $('#returnDate').val();		
+					if (rt != '') $('#returnTransferCheck').trigger('click');				
+					var toname2 = $('#ToName2').val();
+					$('#toname2').html(toname2);				
+					// dodatni opis za vozilo
+					var vehicle = $('#VehicleName2').val();
+					$('#vehiclename').html(vehicle);	
+					$('#api').val('SUN');
+					$('#PickupAddress').val(($('#SPAddressHotel').val())+' '+($('#PickupAddress').val()));
+					$('#DropAddress').val(($('#SDAddressHotel').val())+' '+($('#DropAddress').val()));
+					$('#RPickupAddress').val(($('#RPAddressHotel').val())+' '+($('#RPickupAddress').val()));
+					$('#RDropAddress').val(($('#RDAddressHotel').val())+' '+($('#RDropAddress').val()));
+					
+					$('#FlightNo').val(($('#FlightCo').val())+' '+($('#FlightNo').val()));
+					if ($('#FlightNo').val()==' ') $('#FlightNo').val(($('#DFlightCo').val())+' '+($('#DFlightNo').val()));					
+					$('#RFlightNo').val(($('#RFlightCo').val())+' '+($('#RFlightNo').val()));
+					if ($('#RFlightNo').val()==' ') $('#RFlightNo').val(($('#RDFlightCo').val())+' '+($('#RDFlightNo').val()));
+					if ($('#FlightTime').val()=='') $('#FlightTime').val($('#DFlightTime').val());					
+					if ($('#RFlightTime').val()=='') $('#RFlightTime').val($('#RDFlightTime').val());										
+				}
+		});
+	});
+</script>
