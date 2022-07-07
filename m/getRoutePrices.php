@@ -1,12 +1,9 @@
 <?
-define("ROOTA_HOME", 'https://'.$_SERVER['HTTP_HOST'] . "/jamtransferdev/");
-define("ROOTA", $_SERVER['DOCUMENT_ROOT'] . "/jamtransferdev/");
-require_once ROOTA . '../config.php';
+
 
 require_once ROOT . '/db/db.class.php';
-
 $db = new DataBaseMysql();
-
+/*
 function getRoutePrices($fromID, $toID)
 {
 	global $db;
@@ -72,7 +69,7 @@ function getRoutePrices($fromID, $toID)
 						$prices[$type] = $sp;
 					}
 				}	*/
-
+/*
 
 				if (array_key_exists($type, $prices)) {
 					if ($prices[$type] > $sp) {
@@ -88,7 +85,8 @@ function getRoutePrices($fromID, $toID)
 	return $prices;
 }
 
-
+*/
+/*
 function calculateBasePrice($price, $ownerid)
 {
 	global $db;
@@ -111,3 +109,4 @@ function calculateBasePrice($price, $ownerid)
 
 	return '0';
 }
+*/
