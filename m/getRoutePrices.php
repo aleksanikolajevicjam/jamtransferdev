@@ -1,5 +1,7 @@
 <?
-require_once '../config.php';
+define("ROOTA_HOME", 'https://'.$_SERVER['HTTP_HOST'] . "/jamtransferdev/");
+define("ROOTA", $_SERVER['DOCUMENT_ROOT'] . "/jamtransferdev/");
+require_once ROOTA . '../config.php';
 
 require_once ROOT . '/db/db.class.php';
 
