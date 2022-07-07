@@ -16,8 +16,10 @@ while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
 }
 $smarty->assign('agents', $agents);
 ?>
-<?php
 
+
+
+<?php
 foreach ($agents as $id => $name) {
     if ($AgentID == $id) $selected = 'selected';
     else $selected = '';
@@ -26,8 +28,7 @@ foreach ($agents as $id => $name) {
 
 ?>
 
-
-<?
+<?/*
 for($i=1; $i<55; $i++) {
     echo '<option value="'.$i.'" ';
     if ($PaxNo==$i) echo 'selected="selected" ';
