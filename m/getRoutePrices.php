@@ -1,6 +1,6 @@
 <?
 require_once '../config.php';
-/*
+
 	require_once ROOT . '/db/db.class.php';
 	
 	$db = new DataBaseMysql();
@@ -71,7 +71,7 @@ function getRoutePrices($fromID, $toID) {
 						$prices[$type] = $sp;
 					}
 				}	*/			
-				/*
+				
 				
 				if(array_key_exists($type, $prices) ) {
 					if($prices[$type] > $sp) {
