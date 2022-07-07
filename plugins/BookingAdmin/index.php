@@ -17,21 +17,10 @@ while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
 $smarty->assign('agents', $agents);
 ?>
 
-
-
-<?
-for($i=1; $i<55; $i++) {
-    echo '<option value="'.$i.'" ';
-    if ($PaxNo==$i) echo 'selected="selected" ';
-    echo '>'.$i.'</option>';
-}
-
-?>
-<?/* if
+<? if
 (s('returnTransfer')=='1' ) echo 'checked' ;?>
 <?
-require_once $_SERVER['DOCUMENT_ROOT'] .
-    '/m/getRoutePrices.php';
+require_once ROOT . '/m/getRoutePrices.php';
 $car= getRoutePrices( s('FromID'), s('ToID') );
 $cells= count($car);
 
