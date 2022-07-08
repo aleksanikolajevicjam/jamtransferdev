@@ -622,25 +622,6 @@ $('input, select').change(function(){
 		}
 
 
-		if ($("#PaxFirstName").val() == '') {
-			errorMessage +='First Name\n';
-			$("#PaxFirstName").addClass('notValid');
-		}
-
-		if ($("#PaxLastName").val() == '') {
-			errorMessage +='Last Name\n';
-			$("#PaxLastName").addClass('notValid');
-		}
-
-		if ($("#PaxEmail").val() == '') {
-			errorMessage +='E-mail\n';
-			$("#PaxEmail").addClass('notValid');
-		}
-
-		if ($("#PaxTel").val() == '') {
-			errorMessage +='Mobile number\n';
-			$("#PaxTel").addClass('notValid');
-		}
 
 
 		if (errorMessage != '') {
