@@ -117,4 +117,6 @@ switch ($cells) {
 </div>
 
 <?
+$CountryID = $_SESSION['CountryID'];
+$smarty->assign('CountryID', $CountryID);
 ?>
