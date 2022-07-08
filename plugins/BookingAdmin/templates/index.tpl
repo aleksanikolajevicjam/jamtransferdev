@@ -30,7 +30,6 @@
           action=""
           method="POST"
           enctype="multipart/form-data"
-          onsubmit="return validateBookingForm();"
         >
           <input type="hidden" id="pleaseSelect" value="{$PLEASE_SELECT}" />
           <input type="hidden" id="loading" value="{$LOADING}" />
