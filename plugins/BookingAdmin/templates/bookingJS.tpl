@@ -776,12 +776,18 @@ function url_slug(s, opt) {
 	}
 	
 	// Replace non-alphanumeric characters with our delimiter
+    {literal}
+
 	var alnum = (typeof(XRegExp) === 'undefined') ? RegExp('[^a-z0-9]+', 'ig') : XRegExp('[^\\p{L}\\p{N}]+', 'ig');
 	s = s.replace(alnum, opt.delimiter);
-	
+{/literal}
+
 	// Remove duplicate delimiters
+    {literal}
+
 	s = s.replace(RegExp('[' + opt.delimiter + ']{2,}', 'g'), opt.delimiter);
-	
+    {/literal}
+
 	// Truncate slug to max. characters
 	s = s.substring(0, opt.limit);
 	
