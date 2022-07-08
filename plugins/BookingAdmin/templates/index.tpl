@@ -617,4 +617,3 @@
 </script>
 
 {include file="plugins/BookingAdmin/templates/bookingAdminJS.tpl"}
-{include file="plugins/BookingAdmin/templates/bookingJS.tpl"}
