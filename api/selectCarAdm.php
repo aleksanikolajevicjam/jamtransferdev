@@ -296,7 +296,7 @@ if (count($carsErrorMessage) == 0) {
 					<div id="ProfileButton" onclick="ShowDriverProfile('<?= $oid ?>')">
 					 	<div class="col s12 white shadow clickPanel pad1em">
 							<img class="roundImg carShadow" src="<?= $driverData['ProfileImage'] ?>"
-							 style="height:4em;width:4em;xfloat:left;margin-right:1em"><br>
+							 style="height:4em;width:4em;margin-right:1em"><br>
 							 <?= $driverData['Company']?> 
 						</div>
 					</div>
