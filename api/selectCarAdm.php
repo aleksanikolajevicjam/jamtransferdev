@@ -115,7 +115,7 @@ if (count($carsErrorMessage) == 0) {
 					
 					<!-- driver profile and ratings -->
 					
-					<div style="display: none;" class="col-md-4 row">
+					<div class="col-md-4 row">
 						<?
 						$addToPrice =   $carData['MonPrice'] +
 										$carData['TuePrice'] +
@@ -281,7 +281,7 @@ if (count($carsErrorMessage) == 0) {
 
 
 	<? if (SITE_CODE == '1') { ?>
-		<div class="col s12  lgray center pad1em">
+		<div style="display: none;" class="col s12  lgray center pad1em">
 				<div class="col s12 ucase">
 					<hr>
 						<h2 class="center"><?= DRIVERS_PROFILES ?></h2>
