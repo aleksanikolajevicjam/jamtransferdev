@@ -19,7 +19,6 @@ require_once '../config.php';
 	// priprema podataka o vozilima i vozacima
 	
 	require_once ROOT . '/api/getCarsAdm.php';
-echo "hello";
 
 	//require_once ROOT . '/api/getContractPrices.php';
 
@@ -116,7 +115,7 @@ if (count($carsErrorMessage) == 0) {
 					
 					<!-- driver profile and ratings -->
 					
-					<div class="col-md-4 row">
+					<div style="display: none;" class="col-md-4 row">
 						<?
 						$addToPrice =   $carData['MonPrice'] +
 										$carData['TuePrice'] +
