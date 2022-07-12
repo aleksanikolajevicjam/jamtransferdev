@@ -273,17 +273,17 @@ else {
 							# nemoj dodati cijene ako driver nije Active!!!
 							if($au->getActive() == 0) $okToAdd = false;
 							
+							if(isVehicleOffDuty($VehicleID, $transferDate, $transferTime)) $okToAdd = false;
 							
+							if($returnDate != '') {
+								if(isVehicleOffDuty($VehicleID, $returnDate, $returnTime)) $okToAdd = false;
+							}
 
 							// ugovor sa KLM, preskacu se servisi koji ne pripadaju 1650.
 							$klm=array(1629,2829,2857);
 							$contractdrivers=array(836,1650,556,2113);
 							if ((in_array($_REQUEST['AgentID'], $klm) && !in_array($OwnerID, $contractdrivers))) $okToAdd = false;			
-							if(isVehicleOffDuty($VehicleID, $transferDate, $transferTime) and !in_array($_REQUEST['AgentID'], $klm)) $okToAdd = false;
-							
-							if($returnDate != '') {
-								if(isVehicleOffDuty($VehicleID, $returnDate, $returnTime) and !in_array($_REQUEST['AgentID'], $klm) ) $okToAdd = false;
-							}
+
 
 						
 						// sortiranje top drivera ispred ostalih
