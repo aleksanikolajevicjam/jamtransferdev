@@ -9,7 +9,7 @@ if (!$_SESSION['UserAuthorized']) die('Bye, bye');
 require_once ROOT . '/db/v4_AuthUsers.class.php';
 
 $db = new DataBaseMysql();
-$query = "SELECT AuthUserID, AuthUserCompany FROM v4_AuthUsers where AuthLevelID = 2;";
+$query = "SELECT AuthUserID, AuthUserCompany FROM `v4_AuthUsers` where AuthLevelID = 2 ORDER BY `v4_AuthUsers`.`AuthUserCompany` ASC";
 $result = $db->RunQuery($query);
 $agents = array();
 while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
