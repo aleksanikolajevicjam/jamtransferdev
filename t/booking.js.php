@@ -1,3 +1,5 @@
+<? session_start() ?>
+<? //echo '<pre>'; print_r($_SESSION); echo '</pre>'; ?>
 
 <script>
 var apiPath="/cms/api2/";
@@ -18,7 +20,7 @@ var WEBSITE = "/api2/";
         $("#ToName").val('');
         $(".toName").hide();
         $("#ToName").attr('disabled','disabled');
-        $("#toLoading").text('{$CLICK_TO_SELECT}');
+        $("#toLoading").text('<?= $CLICK_TO_SELECT ?>');
         
         
         // da ne prolaze krivi podaci
@@ -36,7 +38,7 @@ var WEBSITE = "/api2/";
             return;
         }
 
-        //$("#fromLoading").text('{$SEARCHING}');
+        //$("#fromLoading").text('<?= $SEARCHING?>');
         $("#fromLoading").html(loadingBar);
 
 
@@ -45,7 +47,7 @@ var WEBSITE = "/api2/";
         // kill previous request if still active
         if(typeof ajax_request !== 'undefined') ajax_request.abort();
         ajax_request = $.ajax({
-            url:  './api/getFromPlacesEdgeN.php',
+            url:  WEBSITE + '/getFromPlacesEdgeN.php',
             type: 'GET',
             dataType: 'jsonp',
             data: {
@@ -68,7 +70,7 @@ var WEBSITE = "/api2/";
                     });
 
                     // data received
-                    $("#fromLoading").text('{$SELECT_SEARCH}');
+                    $("#fromLoading").text('<?= $SELECT_SEARCH ?>');
                     $("#selectFrom_options").show("slow");
                     $("#selectFrom_options").html(html);
 
@@ -80,7 +82,7 @@ var WEBSITE = "/api2/";
                         $("#XToName").val(this.text);
                         $("#XToID").val(this.id);
                         $("#selectFrom_options").hide("slow");
-                        $("#fromLoading").text('{$TYPE_SEARCH}');
+                        $("#fromLoading").text('<?= $TYPE_SEARCH ?>');
                         // clear To
                         $("#ToName").val('');
                         $("#ToID").val('');
@@ -93,10 +95,10 @@ var WEBSITE = "/api2/";
                 } else {
                     $("#fromLoading").html('');
                     html = '<a class="list-group-item toName black-text" id="" >' +
-                                    '{$NOTHING_FOUND}' +
+                                    '<?= $NOTHING_FOUND ?>' +
                             '</a>';
                     html += '<a href="/contact" class="list-group-item toName blue-text" id="" >' +
-                                    '{$CONTACT_US}' +
+                                    '<?= $CONTACT_US ?>' +
                             '</a>';
                     $("#selectFrom_options").show("slow");
                     $("#selectFrom_options").html(html);
@@ -123,14 +125,14 @@ var WEBSITE = "/api2/";
             return; 
         }
 
-        //$("#toLoading").text('{$SEARCHING}');
+        //$("#toLoading").text('<?= $SEARCHING?>');
         $("#toLoading").html(loadingBar);
 
         // kill previous request if still active
         if(typeof ajax_request !== 'undefined') ajax_request.abort();
 
         ajax_request = $.ajax({
-            url: './api/getToPlacesEdge.php',
+            url: WEBSITE + '/getToPlacesEdge.php',
             type: 'GET',
             dataType: 'jsonp',
             data: {
@@ -152,7 +154,7 @@ var WEBSITE = "/api2/";
                                 //'</a>'+
                                 '</a>';
                     });
-                    $("#toLoading").text('{$CLICK_TO_SELECT}');
+                    $("#toLoading").text('<?= $CLICK_TO_SELECT ?>');
                     $("#selectTo_options").show("slow");
                     $("#selectTo_options").html(html);
 
@@ -170,10 +172,10 @@ var WEBSITE = "/api2/";
                 } else {
                     $("#toLoading").html('');
                     html = '<a class="list-group-item toName black-text" id="" >' +
-                                    '{$NOTHING_FOUND}' +
+                                    '<?= $NOTHING_FOUND ?>' +
                             '</a>';
                     html += '<a href="/contact" class="list-group-item toName blue-text" id="" >' +
-                                    '{$CONTACT_US}' +
+                                    '<?= $CONTACT_US ?>' +
                             '</a>';
                     $("#selectTo_options").show("slow");
                     $("#selectTo_options").html(html);
@@ -191,9 +193,16 @@ function selectCountry(selected) {
 		var selectActive 	= '';
 		ReplaceSelectorText("#countrySelector", loading);
 
-
+	<?/*
+		ovo je nacin za uzimanje varijable data iz ajax poziva
+		kreira se funkcija - npr LoadFrom, a onda se pozove ovako kao doli
+		na taj nacin se jedino moze doci do data varijable u nekoj drugoj funkciji
+		Zapravo, umjesto da ajax funkcija jednostavno vrati vrijednost preko return-a
+		mora se sve staviti u ovu doli bezimenu funkciju i u njoj se sve obradi
+	*/?>
 
 	LoadCountries(
+		<? // ovo je ono sto callback poziva ?>
 		function ( data ) {
 
 			ReplaceSelectorText("#countrySelector", pleaseSelect);
@@ -233,7 +242,7 @@ function selectCountry(selected) {
 
 function LoadCountries(callback) {
 	ReplaceSelectorText("#countrySelector", $("#loading").val());
-    request = $.getJSON( "./api/getCountries.php?callback=?",
+    request = $.getJSON( apiPath+"getCountries.php?callback=?",
      function(data) {
      
 		callback(data);
@@ -294,7 +303,7 @@ function selectFrom(selected) {
 }
 function LoadFrom(callback, cID) {
 	ReplaceSelectorText("#fromSelector",$("#loading").val());
-    request = $.getJSON( "./api/getFromPlaces.php?cID="+cID+"&callback=?",
+    request = $.getJSON( apiPath + "getFromPlaces.php?cID="+cID+"&callback=?",
      	function(data) {
 			callback(data);
     });
@@ -362,7 +371,7 @@ function LoadTo(callback, fID) {
     var pleaseSelect = $("#pleaseSelect").val();
     var loading      = $("#loading").val();
 	ReplaceSelectorText("#toSelector",$("#loading").val());
-    request = $.getJSON( "./api/getToPlaces.php?fID="+fID+"&callback=?",
+    request = $.getJSON( apiPath + "getToPlaces.php?fID="+fID+"&callback=?",
 
     function(data) {
         callback(data);
@@ -391,7 +400,7 @@ function slugify(text)
 
     
 // fire up Country -> From -> To selections
-selectCountry('{$CountryID}');
+selectCountry('<?= $_SESSION['CountryID'] ?>');
 
 
 // sakrij vozila ako se bilo sto promijeni ******
@@ -444,7 +453,7 @@ $('input, select').change(function(){
    		var bookingFormData = $("#bookingForm").serialize();
    		    $.ajax({
 		      type: "POST",
-		      url: "./api/selectCarNoDate.php",
+		      url: WEBPATH+"/cms/t/selectCarNoDate.php",
 		      data: bookingFormData
 		    }).done(function( msg ) {
 		                $("#selectCar").html( msg );
@@ -472,7 +481,7 @@ $('input, select').change(function(){
         	//selectCarNoDate();
 		    $.ajax({
 		      type: "POST",
-		      url: "./api/selectCarNoDate.php",
+		      url: WEBPATH+"/cms/t/selectCarNoDate.php",
 		      data: bookingFormData
 		    }).done(function( msg ) {
 		                $("#selectCar").html( msg );
@@ -490,8 +499,8 @@ $('input, select').change(function(){
 	        //if ($('#bookingForm').valid() == false) {
 	        //    return false;
 	        //} 
-			if (ver==2) var url = "./api/selectCarAdm.php"; 
-			else var url = "./api/selectCar.php";
+			if (ver==2) var url = WEBPATH+"/cms/t/selectCarAdm.php"; 
+			else var url = WEBPATH+"/cms/t/selectCar.php";
 	        
 		    $.ajax({
 		      type: "POST",

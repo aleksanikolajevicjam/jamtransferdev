@@ -1,5 +1,4 @@
-<?php
-
+<?
 /*
 	napomena za Surcharges:
 	0 - nema 
@@ -34,20 +33,22 @@
 	
 
 */
+error_reporting(E_PARSE);
+define("DEBUG", 0);
 
-require_once '../config.php';
-//require_once ROOT . '/LoadLanguage.php';
-//hl();
-//require_once ROOT . '/f/f.php';
+@session_start();
 
-require_once ROOT . '/db/db.class.php';
-require_once ROOT . '/db/v4_Services.class.php';
-require_once ROOT . '/db/v4_Routes.class.php';
-require_once ROOT . '/db/v4_DriverRoutes.class.php';
-require_once ROOT . '/db/v4_AuthUsers.class.php';
-require_once ROOT . '/db/v4_Vehicles.class.php';
-require_once ROOT . '/db/v4_VehicleTypes.class.php';
-require_once ROOT . '/db/v4_DriverPrices.class.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/LoadLanguage.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/f/f.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/db/db.class.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/db/v4_Services.class.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/db/v4_Routes.class.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/db/v4_DriverRoutes.class.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/db/v4_AuthUsers.class.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/db/v4_Vehicles.class.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/db/v4_VehicleTypes.class.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/db/v4_DriverPrices.class.php';
 
 
 @Blogit('api/getCarsAdm.php Program start');
@@ -273,18 +274,17 @@ else {
 							# nemoj dodati cijene ako driver nije Active!!!
 							if($au->getActive() == 0) $okToAdd = false;
 							
+							if(isVehicleOffDuty($VehicleID, $transferDate, $transferTime)) $okToAdd = false;
 							
+							if($returnDate != '') {
+								if(isVehicleOffDuty($VehicleID, $returnDate, $returnTime)) $okToAdd = false;
+							}
 
 							// ugovor sa KLM, preskacu se servisi koji ne pripadaju 1650.
 							$klm=array(1629,2829,2857);
 							$contractdrivers=array(836,1650,556,2113);
 							if ((in_array($_REQUEST['AgentID'], $klm) && !in_array($OwnerID, $contractdrivers))) $okToAdd = false;			
-							
-							if(isVehicleOffDuty($VehicleID, $transferDate, $transferTime) && (!in_array($_REQUEST['AgentID'], $klm))) $okToAdd = false;
-							
-							if($returnDate != '') {
-								if(isVehicleOffDuty($VehicleID, $returnDate, $returnTime)  && (!in_array($_REQUEST['AgentID'], $klm))) $okToAdd = false;
-							}
+
 
 						
 						// sortiranje top drivera ispred ostalih
@@ -426,11 +426,22 @@ if(count($cars) == 0) {
 
 
 
-
+function ShowRatings($userId) {
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/db/v4_Ratings.class.php';
+	
+	$r = new v4_Ratings();
+	
+	$r->getRow($userId);
+	
+	if($r->getVotes() > 0)	return $r->getAverage() / $r->getVotes();
+	else return '0';
+	
+	
+}
 
 
 // Dodavanje dogovorene provizije na osnovnu cijenu
-/* function calculateBasePrice($price, $ownerid, $VehicleClass = 1) {
+function calculateBasePrice($price, $ownerid, $VehicleClass = 1) {
 	global $db;
 	
 		//$priceR = round($price, 0, PHP_ROUND_HALF_DOWN);
@@ -475,9 +486,9 @@ if(count($cars) == 0) {
 		return '0';
 
 		
-} */
+}
 
-/* function vehicleTypeName($vehicleTypeID) {
+function vehicleTypeName($vehicleTypeID) {
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/db/db.class.php';
 	$db = new DataBaseMysql();
 	
@@ -489,9 +500,9 @@ if(count($cars) == 0) {
 				    $VehicleTypeName = strtolower($v->$vehicleTypeName);
 	
 	return $VehicleTypeName;
-} */
+}
 
-/* function isVehicleOffDuty($vehicleID, $transferDate, $transferTime) {
+function isVehicleOffDuty($vehicleID, $transferDate, $transferTime) {
 	$cnt = 0;
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/db/db.class.php';
 	$db = new DataBaseMysql();
@@ -509,9 +520,9 @@ if(count($cars) == 0) {
 	
 	if($cnt >= 1) return true;
 	else return false;
-} */
+}
 
-/* function calculateSpecialDates($OwnerID, $amount, $transferDate, $transferTime, $returnDate='', $returnTime='') {
+function calculateSpecialDates($OwnerID, $amount, $transferDate, $transferTime, $returnDate='', $returnTime='') {
 
     if( empty($OwnerID) or empty($amount) or empty($transferDate)  or empty($transferTime) ) return 0;
 
@@ -539,9 +550,9 @@ if(count($cars) == 0) {
     }
     // zbroji oba transfera
     return $add1 + $add2;
-} */
+}
 
-/* function getCarImage ($VehicleClass) {
+function getCarImage ($VehicleClass) {
 	if ($VehicleClass == '1') $vehicleImageFile = '/i/cars/sedan.jpg';
 	else if ($VehicleClass == '2') $vehicleImageFile = '/i/cars/minivanl.jpg';
 	else if ($VehicleClass == '3') $vehicleImageFile = '/i/cars/minibusl.jpg';
@@ -561,4 +572,4 @@ if(count($cars) == 0) {
 	else if ($VehicleClass == '25' or $VehicleClass == '26') 	$vehicleImageFile = '/i/cars/bus_l.jpg';
 	
 	return$VehicleImageRoot.$vehicleImageFile;
-}					 */
+}					

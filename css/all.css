@@ -11249,7 +11249,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 
 .material-icons {vertical-align: middle !important}
 .no-pad-bot {padding-bottom: 0px !important}
-.btn {display:inline-block !important;height:100% !important; word-wrap: break-word !important}
+.btn {display:inline-block !important;word-wrap: break-word !important}
 
 .text-shadow {text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);}
 .line {height:2px !important;width:100% !important;overflow:hidden;}

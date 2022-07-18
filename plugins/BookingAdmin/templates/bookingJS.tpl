@@ -348,7 +348,7 @@ function selectTo(selected) {
         	//***********************************************************
         	//selectCar(false); // ne prikazuj alert kad se tek ucita stranica
         	var formValid = validateBookingForm(false);
-        	if(formValid) {selectCar();}
+        	if(formValid) { selectCar();}
 
     	},
     	fromID // obavezan parametar za ajax poziv
@@ -449,7 +449,7 @@ $('input, select').change(function(){
 		    }).done(function( msg ) {
 		                $("#selectCar").html( msg );
 		                $('#selectCar').slideDown('slow');
-		                //$('html, body').animate({scrollTop: $('#selectCar').offset().top }, 800);
+		                //$('html, body').animate({ scrollTop: $('#selectCar').offset().top }, 800);
 
 						$(".tab").hide();
 						$("#tab_1").removeClass('hidden').show();
@@ -477,7 +477,7 @@ $('input, select').change(function(){
 		    }).done(function( msg ) {
 		                $("#selectCar").html( msg );
 		                $('#selectCar').slideDown('slow');
-		                //$('html, body').animate({scrollTop: $('#selectCar').offset().top }, 800);
+		                //$('html, body').animate({ scrollTop: $('#selectCar').offset().top }, 800);
 
 						$(".tab").hide();
 						$("#tab_1").removeClass('hidden').show();
@@ -506,7 +506,7 @@ $('input, select').change(function(){
 						$("#tab_1").removeClass('hidden').show();
 						$("#tabBtn1").removeClass('hidden').show();
 						
-						$('html, body').animate({scrollTop: $('#selectCar').offset().top }, 800);
+						$('html, body').animate({ scrollTop: $('#selectCar').offset().top }, 800);
 		                //$("#selectExtras").slideUp('slow');
 		                //$("#paymentData").slideUp('slow');
 		    });
@@ -524,7 +524,7 @@ $('input, select').change(function(){
 		ako je kliknut button, onda se a tag nece aktivirati
 		inace se aktivira a tag
 		*/
-		//if(document.activeElement.tagName=='BUTTON') {return false;}
+		//if(document.activeElement.tagName=='BUTTON') { return false;}
 		
 
 		var vehicleid 		= $("#v"+linkId).attr("data-vehicleid");
@@ -622,25 +622,6 @@ $('input, select').change(function(){
 		}
 
 
-		if ($("#PaxFirstName").val() == '') {
-			errorMessage +='First Name\n';
-			$("#PaxFirstName").addClass('notValid');
-		}
-
-		if ($("#PaxLastName").val() == '') {
-			errorMessage +='Last Name\n';
-			$("#PaxLastName").addClass('notValid');
-		}
-
-		if ($("#PaxEmail").val() == '') {
-			errorMessage +='E-mail\n';
-			$("#PaxEmail").addClass('notValid');
-		}
-
-		if ($("#PaxTel").val() == '') {
-			errorMessage +='Mobile number\n';
-			$("#PaxTel").addClass('notValid');
-		}
 
 
 		if (errorMessage != '') {
@@ -668,7 +649,7 @@ $('input, select').change(function(){
     error.appendTo( element.parent("div") );
   },
 		rules: {
-			transferDate: {required:true, email:true}
+			transferDate:  { required:true, email:true}
 		}
 	});	
 */
@@ -685,7 +666,7 @@ function url_slug(s, opt) {
 		'delimiter': '_',
 		'limit': undefined,
 		'lowercase': true,
-		'replacements': {},
+		'replacements': { },
 		'transliterate': (typeof(XRegExp) === 'undefined') ? true : false
 	};
 	
@@ -776,12 +757,14 @@ function url_slug(s, opt) {
 	}
 	
 	// Replace non-alphanumeric characters with our delimiter
-	var alnum = (typeof(XRegExp) === 'undefined') ? RegExp('[^a-z0-9]+', 'ig') : XRegExp('[^\\p{L}\\p{N}]+', 'ig');
+
+	var alnum = (typeof(XRegExp) === 'undefined') ? RegExp('[^a-z0-9]+', 'ig') : XRegExp('[^\\p{ L }\\p{ N }]+', 'ig');
 	s = s.replace(alnum, opt.delimiter);
-	
+
 	// Remove duplicate delimiters
-	s = s.replace(RegExp('[' + opt.delimiter + ']{2,}', 'g'), opt.delimiter);
-	
+
+	s = s.replace(RegExp('[' + opt.delimiter + ']{ 2, }', 'g'), opt.delimiter);
+    
 	// Truncate slug to max. characters
 	s = s.substring(0, opt.limit);
 	

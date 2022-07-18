@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="./js/jQuery/jquery-ui-timepicker.css">
 
 <script>
-var WEBPATH = "https://<?= $_SERVER['HTTP_HOST'] ?>";
+var WEBPATH = "";
 </script>
 
 <script src="./js/all.js"></script>
@@ -16,20 +16,9 @@ var WEBPATH = "https://<?= $_SERVER['HTTP_HOST'] ?>";
 
 	$(document).ready(function(){
 
-			<?
-			$AuthUserID = $_SESSION['AuthUserID'];
-			$local = isLocalAgent($AuthUserID);
-			if ($local == 1) {
-			?>
+		
 
-			<? 	# LIMIT BOOKING DATE & TIME
-				# UNIJETI dateLimit ili hourLimit, a onaj drugi staviti na nulu
-				# ako se unesu oba onda se limitira i broj dana i broj sati nakon toga
-			?>	
-		<? 	# LIMIT BOOKING DATE & TIME
-			# UNIJETI dateLimit ili hourLimit, a onaj drugi staviti na nulu
-			# ako se unesu oba onda se limitira i broj dana i broj sati nakon toga
-		?>	
+			
 		var currentDate 	= new Date();
 		var currentTime 	= currentDate.getHours();
 		var dateLimit 		= 0;
@@ -87,12 +76,8 @@ var WEBPATH = "https://<?= $_SERVER['HTTP_HOST'] ?>";
 			}
 		});
 		
-	<? } else { ?>
 	
-		<? 	# LIMIT BOOKING DATE & TIME
-			# UNIJETI dateLimit ili hourLimit, a onaj drugi staviti na nulu
-			# ako se unesu oba onda se limitira i broj dana i broj sati nakon toga
-		?>	
+		
 		var currentDate 	= new Date();
 		var currentTime 	= currentDate.getHours();
 		var dateLimit 		= -1;
@@ -156,7 +141,6 @@ var WEBPATH = "https://<?= $_SERVER['HTTP_HOST'] ?>";
 			}
 		});
 	
-	<? } ?>
 
  }); // end doc ready
 </script>	

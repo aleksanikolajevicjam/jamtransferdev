@@ -1,16 +1,16 @@
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="./css/all.css" media="screen">
-<link rel="stylesheet" type="text/css" href="./js/jQuery/jquery-ui-1.8.9.custom.css">
-<link rel="stylesheet" type="text/css" href="./js/jQuery/jquery.ui.datepicker.css">
-<link rel="stylesheet" type="text/css" href="./js/jQuery/jquery-ui-timepicker.css">
+<link rel="stylesheet" type="text/css" href="https://<?= $_SERVER['HTTP_HOST'] ?>/all.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../js/jQuery/jquery-ui-1.8.9.custom.css">
+<link rel="stylesheet" type="text/css" href="../js/jQuery/jquery.ui.datepicker.css">
+<link rel="stylesheet" type="text/css" href="../js/jQuery/jquery-ui-timepicker.css">
 
 <script>
 var WEBPATH = "https://<?= $_SERVER['HTTP_HOST'] ?>";
 </script>
 
-<script src="./js/all.js"></script>
-<script src="./js/jQuery/jquery.ui.core.js"></script>
-<script src="./js/jQuery/jquery.ui.timepicker.js"></script>
+<script src="https://<?= $_SERVER['HTTP_HOST'] ?>/all.js"></script>
+<script src="../js/jQuery/jquery.ui.core.js"></script>
+<script src="../js/jQuery/jquery.ui.timepicker.js"></script>
 
 <script type="text/javascript">
 
@@ -19,6 +19,7 @@ var WEBPATH = "https://<?= $_SERVER['HTTP_HOST'] ?>";
 			<?
 			$AuthUserID = $_SESSION['AuthUserID'];
 			$local = isLocalAgent($AuthUserID);
+			//$local=1;
 			if ($local == 1) {
 			?>
 
@@ -33,7 +34,7 @@ var WEBPATH = "https://<?= $_SERVER['HTTP_HOST'] ?>";
 		var currentDate 	= new Date();
 		var currentTime 	= currentDate.getHours();
 		var dateLimit 		= 0;
-		var hourLimit   	= currentTime;
+		var hourLimit   	= currentTime-1;
 
 		var limitDate = new Date(currentDate.getFullYear(),currentDate.getMonth(),currentDate.getDate()
 								  +dateLimit);
@@ -68,6 +69,7 @@ var WEBPATH = "https://<?= $_SERVER['HTTP_HOST'] ?>";
 				}
 			    return true;
 			}
+			
 		});
 
 		$('#returnTime').timepicker({
@@ -95,9 +97,10 @@ var WEBPATH = "https://<?= $_SERVER['HTTP_HOST'] ?>";
 		?>	
 		var currentDate 	= new Date();
 		var currentTime 	= currentDate.getHours();
-		var dateLimit 		= -1;
-		var hourLimit   	= -24;
+		var dateLimit 		= 0;
+		var hourLimit   	= 6;
 		var limitT			= parseInt(currentTime + hourLimit, 10);
+		
 		if( limitT > 24 ) {
 			dateLimit += 1;
 			limitT = limitT - 24;
@@ -113,6 +116,7 @@ var WEBPATH = "https://<?= $_SERVER['HTTP_HOST'] ?>";
 			onSelect: function(dateStr) {
 				$("#returnDate").datepicker('option', 'minDate', dateStr);
 				$("#transferTime").val('');
+				 $("#transferDate").removeClass("fldError");
 			}
 		 });
 
@@ -128,13 +132,12 @@ var WEBPATH = "https://<?= $_SERVER['HTTP_HOST'] ?>";
 
 		$('#transferTime').timepicker({
 			onHourShow: function( hour ) { 
-
 				if ( $('#transferDate').val() == $.datepicker.formatDate ( 'yy-mm-dd', limitDate ) ) {
 					if ( hour <= limitT ) {
-
 			            return false;
 			        }
 				}
+				$("#transferTime").removeClass("fldError");
 			    return true;
 			}
 		});

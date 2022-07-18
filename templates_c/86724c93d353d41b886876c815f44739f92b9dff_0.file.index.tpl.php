@@ -1,4 +1,30 @@
-{include file="plugins/BookingAdmin/templates/scriptsAdm.tpl"}
+<?php
+/* Smarty version 3.1.32, created on 2022-07-07 10:31:41
+  from 'C:\xampp\htdocs\jamtransferdev\plugins\BookingAdmin\templates\index.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.32',
+  'unifunc' => 'content_62c699ed5b77a5_63076978',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '86724c93d353d41b886876c815f44739f92b9dff' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\jamtransferdev\\plugins\\BookingAdmin\\templates\\index.tpl',
+      1 => 1657182699,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:plugins/BookingAdmin/templates/scriptsAdm.tpl' => 1,
+    'file:plugins/BookingAdmin/templates/BookingAdminJS.tpl' => 1,
+  ),
+),false)) {
+function content_62c699ed5b77a5_63076978 (Smarty_Internal_Template $_smarty_tpl) {
+$_smarty_tpl->_subTemplateRender("file:plugins/BookingAdmin/templates/scriptsAdm.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
 <div
   style="
     background: transparent url('./i/header/112.jpg') center fixed;
@@ -17,7 +43,8 @@
   >
     <div class="row">
       <div class="col s12 xucase center white-text">
-        <h3>ADMINISTRATION {$BOOKING}</h3>
+        <h3>ADMINISTRATION <?php echo $_smarty_tpl->tpl_vars['BOOKING']->value;?>
+</h3>
         <p class="divider clearfix"></p>
       </div>
       <!-- title column -->
@@ -30,9 +57,12 @@
           action=""
           method="POST"
           enctype="multipart/form-data"
+          onsubmit="return validateBookingForm();"
         >
-          <input type="hidden" id="pleaseSelect" value="{$PLEASE_SELECT}" />
-          <input type="hidden" id="loading" value="{$LOADING}" />
+          <input type="hidden" id="pleaseSelect" value="<?php echo $_smarty_tpl->tpl_vars['PLEASE_SELECT']->value;?>
+" />
+          <input type="hidden" id="loading" value="<?php echo $_smarty_tpl->tpl_vars['LOADING']->value;?>
+" />
 
           <div class="col l6 s12">
             <label for="AuthUserIDe"
@@ -43,14 +73,26 @@
                 class="xchosen-select browser-default"
                 id="AgentID"
                 name="AgentID"
-                value="{$AgentID}"
+                value="<?php echo $_smarty_tpl->tpl_vars['AgentID']->value;?>
+"
               >
                 <option value="0">---</option>
-                {section name=index loop=$agents}
-                <option value="{$agents[index].AuthUserID}">
-                  {$agents[index].AuthUserCompany}
+                <?php
+$__section_index_0_loop = (is_array(@$_loop=$_smarty_tpl->tpl_vars['agents']->value) ? count($_loop) : max(0, (int) $_loop));
+$__section_index_0_total = $__section_index_0_loop;
+$_smarty_tpl->tpl_vars['__smarty_section_index'] = new Smarty_Variable(array());
+if ($__section_index_0_total !== 0) {
+for ($__section_index_0_iteration = 1, $_smarty_tpl->tpl_vars['__smarty_section_index']->value['index'] = 0; $__section_index_0_iteration <= $__section_index_0_total; $__section_index_0_iteration++, $_smarty_tpl->tpl_vars['__smarty_section_index']->value['index']++){
+?>
+                <option value="<?php echo $_smarty_tpl->tpl_vars['agents']->value[(isset($_smarty_tpl->tpl_vars['__smarty_section_index']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_index']->value['index'] : null)]['AuthUserID'];?>
+">
+                  <?php echo $_smarty_tpl->tpl_vars['agents']->value[(isset($_smarty_tpl->tpl_vars['__smarty_section_index']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_index']->value['index'] : null)]['AuthUserCompany'];?>
+
                 </option>
-                {/section}
+                <?php
+}
+}
+?>
               </select>
             </div>
           </div>
@@ -75,7 +117,8 @@
               type="text"
               id="weby_key"
               name="weby_key"
-              value="{$weby_key}"
+              value="<?php echo $_smarty_tpl->tpl_vars['weby_key']->value;?>
+"
               disabled
             /><br />
             <select
@@ -103,26 +146,32 @@
             <br />
             <label for="fromSelectorValue"
               ><i class="fa fa-map-marker"></i>
-              {$FROM} </label
+              <?php echo $_smarty_tpl->tpl_vars['FROM']->value;?>
+ </label
             ><br />
             <input
               type="hidden"
               id="FromID"
               name="FromID"
-              value="{$fromID}"
+              value="<?php echo $_smarty_tpl->tpl_vars['fromID']->value;?>
+"
             /><i class="pe-7s-car pe-lg pe-va white-text"></i>
-            {$STARTING_FROM}
+            <?php echo $_smarty_tpl->tpl_vars['STARTING_FROM']->value;?>
+
             <input
               type="text"
               id="FromName"
               name="FromName"
-              value="{$fromName}"
+              value="<?php echo $_smarty_tpl->tpl_vars['fromName']->value;?>
+"
               class="input-lg"
               style="width: 100%"
-              placeholder="{$SEARCH_PLACEHOLDER}"
+              placeholder="<?php echo $_smarty_tpl->tpl_vars['SEARCH_PLACEHOLDER']->value;?>
+"
               autocomplete="off"
             />
-            <span id="fromLoading" class="small"> {$TYPE_SEARCH} </span>
+            <span id="fromLoading" class="small"> <?php echo $_smarty_tpl->tpl_vars['TYPE_SEARCH']->value;?>
+ </span>
             <div
               id="selectFrom_options"
               class="list-group white"
@@ -135,24 +184,30 @@
             <br />
             <label for="toSelectorValue"
               ><i class="fa fa-map-marker"></i>
-              {$TO}
+              <?php echo $_smarty_tpl->tpl_vars['TO']->value;?>
+
             </label>
             <span style="color: white" id="toname2"></span><br />
-            <input type="hidden" id="ToID" name="ToID" value="{$toID}" /><i
+            <input type="hidden" id="ToID" name="ToID" value="<?php echo $_smarty_tpl->tpl_vars['toID']->value;?>
+" /><i
               class="pe-7s-map-marker pe-lg pe-va white-text"
             ></i>
-            {$GOING_TO}
+            <?php echo $_smarty_tpl->tpl_vars['GOING_TO']->value;?>
+
             <input
               type="text"
               id="ToName"
               name="ToName"
-              value="{$toName}"
+              value="<?php echo $_smarty_tpl->tpl_vars['toName']->value;?>
+"
               class="input-lg"
               style="width: 100%"
-              placeholder="{$SEARCH_PLACEHOLDER}"
+              placeholder="<?php echo $_smarty_tpl->tpl_vars['SEARCH_PLACEHOLDER']->value;?>
+"
               autocomplete="off"
             />
-            <span id="toLoading" class="small"> {$TYPE_SEARCH} </span>
+            <span id="toLoading" class="small"> <?php echo $_smarty_tpl->tpl_vars['TYPE_SEARCH']->value;?>
+ </span>
             <div
               id="selectTo_options"
               class="list-group white"
@@ -164,18 +219,28 @@
             <br />
             <label for="paxSelector">
               <i class="fa fa-user"></i>
-              {$PASSENGERS_NO}
+              <?php echo $_smarty_tpl->tpl_vars['PASSENGERS_NO']->value;?>
+
             </label>
             <select
               id="paxSelector"
               class="browser-default"
               name="PaxNo"
-              value="{$PaxNo}"
+              value="<?php echo $_smarty_tpl->tpl_vars['PaxNo']->value;?>
+"
             >
               <option value="0">---</option>
-              {for $pax=1 to 54}
-              <option value="{$pax}">{$pax}</option>
-              {/for}
+              <?php
+$_smarty_tpl->tpl_vars['pax'] = new Smarty_Variable(null, $_smarty_tpl->isRenderingCache);$_smarty_tpl->tpl_vars['pax']->step = 1;$_smarty_tpl->tpl_vars['pax']->total = (int) ceil(($_smarty_tpl->tpl_vars['pax']->step > 0 ? 54+1 - (1) : 1-(54)+1)/abs($_smarty_tpl->tpl_vars['pax']->step));
+if ($_smarty_tpl->tpl_vars['pax']->total > 0) {
+for ($_smarty_tpl->tpl_vars['pax']->value = 1, $_smarty_tpl->tpl_vars['pax']->iteration = 1;$_smarty_tpl->tpl_vars['pax']->iteration <= $_smarty_tpl->tpl_vars['pax']->total;$_smarty_tpl->tpl_vars['pax']->value += $_smarty_tpl->tpl_vars['pax']->step, $_smarty_tpl->tpl_vars['pax']->iteration++) {
+$_smarty_tpl->tpl_vars['pax']->first = $_smarty_tpl->tpl_vars['pax']->iteration === 1;$_smarty_tpl->tpl_vars['pax']->last = $_smarty_tpl->tpl_vars['pax']->iteration === $_smarty_tpl->tpl_vars['pax']->total;?>
+              <option value="<?php echo $_smarty_tpl->tpl_vars['pax']->value;?>
+"><?php echo $_smarty_tpl->tpl_vars['pax']->value;?>
+</option>
+              <?php }
+}
+?>
             </select>
           </div>
           <!-- passengers no. -->
@@ -184,7 +249,8 @@
             <br />
             <label for="transferDate"
               ><i class="fa fa-calendar-o"></i>
-              {$PICKUP_DATE} </label
+              <?php echo $_smarty_tpl->tpl_vars['PICKUP_DATE']->value;?>
+ </label
             ><br />
             <input
               type="text"
@@ -192,7 +258,8 @@
               class="browser-default"
               name="transferDate"
               readonly
-              value="{$transferDate}"
+              value="<?php echo $_smarty_tpl->tpl_vars['transferDate']->value;?>
+"
               data-field="date"
             />
           </div>
@@ -202,14 +269,16 @@
             <br />
             <label for="transferTime"
               ><i class="fa fa-clock-o"></i>
-              {$PICKUP_TIME} </label
+              <?php echo $_smarty_tpl->tpl_vars['PICKUP_TIME']->value;?>
+ </label
             ><br />
             <input
               type="text"
               id="transferTime"
               class="browser-default timepick"
               name="transferTime"
-              value="{$transferTime}"
+              value="<?php echo $_smarty_tpl->tpl_vars['transferTime']->value;?>
+"
               data-field="time"
             />
           </div>
@@ -220,18 +289,21 @@
             <div class="switch">
               <label for="returnTransferCheck">
                 <i class="fa fa-undo"></i>
-                {$RETURN_TRANSFER}
+                <?php echo $_smarty_tpl->tpl_vars['RETURN_TRANSFER']->value;?>
+
               </label>
               <br /><br />
               <label class="center">
-                {$NO}
+                <?php echo $_smarty_tpl->tpl_vars['NO']->value;?>
+
                 <input
                   type="checkbox"
                   name="returnTransferCheck"
                   id="returnTransferCheck"
                 />
                 <span class="lever"></span>
-                {$YES}
+                <?php echo $_smarty_tpl->tpl_vars['YES']->value;?>
+
               </label>
               <br /><br />
             </div>
@@ -247,7 +319,8 @@
               <br />
               <label for="returnDate"
                 ><i class="fa fa-calendar-o"></i>
-                {$RETURN_DATE} </label
+                <?php echo $_smarty_tpl->tpl_vars['RETURN_DATE']->value;?>
+ </label
               ><br />
               <input
                 type="text"
@@ -255,7 +328,8 @@
                 class="browser-default"
                 name="returnDate"
                 readonly
-                value="{$returnDate}"
+                value="<?php echo $_smarty_tpl->tpl_vars['returnDate']->value;?>
+"
                 data-field="date"
               />
             </div>
@@ -263,7 +337,8 @@
               <br />
               <label for="returnTime"
                 ><i class="fa fa-clock-o"></i>
-                {$PICKUP_TIME} </label
+                <?php echo $_smarty_tpl->tpl_vars['PICKUP_TIME']->value;?>
+ </label
               ><br />
               <input
                 type="text"
@@ -271,7 +346,8 @@
                 name="returnTime"
                 class="browser-default timepick"
                 data-field="time"
-                value="{$returnTime}"
+                value="<?php echo $_smarty_tpl->tpl_vars['returnTime']->value;?>
+"
               />
               <br /><br />
             </div>
@@ -285,7 +361,8 @@
             <div class="col s12 l9">
               <p>
                 <i class="fa fa-info-circle fa-2x red-text"></i>
-                {$AVAILABILITY_DEPENDS}
+                <?php echo $_smarty_tpl->tpl_vars['AVAILABILITY_DEPENDS']->value;?>
+
               </p>
             </div>
             <div class="col s6 l3 pull">
@@ -296,7 +373,8 @@
                 onclick="return false;"
               >
                 <i class="fa fa-chevron-down"></i>
-                {$SELECT_CAR}
+                <?php echo $_smarty_tpl->tpl_vars['SELECT_CAR']->value;?>
+
               </button>
               <button id="empty" type="button" class="btn btn-large">
                 Empty fields
@@ -310,12 +388,17 @@
               <div id="selectCar">
                 <div class="col s12 center-align xwhite-text">
                   <br />
-                  <h4>{$PRICES_STARTING_FROM}</h4>
+                  <h4><?php echo $_smarty_tpl->tpl_vars['PRICES_STARTING_FROM']->value;?>
+</h4>
                 </div>
 
                 <div class="col s12 ucase s center xwhite-text">
-                  {$SERVICES_DESC1} {$SERVICES_DESC2} {$SERVICES_DESC3}
-                  {$SERVICES_DESC4}
+                  <?php echo $_smarty_tpl->tpl_vars['SERVICES_DESC1']->value;?>
+ <?php echo $_smarty_tpl->tpl_vars['SERVICES_DESC2']->value;?>
+ <?php echo $_smarty_tpl->tpl_vars['SERVICES_DESC3']->value;?>
+
+                  <?php echo $_smarty_tpl->tpl_vars['SERVICES_DESC4']->value;?>
+
                 </div>
               </div>
               <div id="final" style="display: none">Proba</div>
@@ -361,66 +444,77 @@
             type="hidden"
             id="PaxFirstName"
             name="PaxFirstName"
-            value="{$PaxFirstName}"
+            value="<?php echo $_smarty_tpl->tpl_vars['PaxFirstName']->value;?>
+"
           />
           <input
             type="hidden"
             id="PaxSurName"
             name="PaxSurName"
-            value="{$MPaxLastName}"
+            value="<?php echo $_smarty_tpl->tpl_vars['MPaxLastName']->value;?>
+"
           />
-          <input type="hidden" id="PaxTel" name="PaxTel" value="{$PaxTel}" />
+          <input type="hidden" id="PaxTel" name="PaxTel" value="<?php echo $_smarty_tpl->tpl_vars['PaxTel']->value;?>
+" />
           <input
             type="hidden"
             id="FlightNo"
             name="FlightNo"
-            value="{$FlightNo}"
+            value="<?php echo $_smarty_tpl->tpl_vars['FlightNo']->value;?>
+"
           />
           <input type="hidden" id="FlightCo" name="FlightCo" value="" />
           <input
             type="hidden"
             id="FlightTime"
             name="FlightTime"
-            value="{$FlightTime}"
+            value="<?php echo $_smarty_tpl->tpl_vars['FlightTime']->value;?>
+"
           />
           <input
             type="hidden"
             id="DFlightNo"
             name="DFlightNo"
-            value="{$DFlightNo}"
+            value="<?php echo $_smarty_tpl->tpl_vars['DFlightNo']->value;?>
+"
           />
           <input type="hidden" id="DFlightCo" name="DFlightCo" value="" />
           <input
             type="hidden"
             id="DFlightTime"
             name="DFlightTime"
-            value="{$DFlightTime}"
+            value="<?php echo $_smarty_tpl->tpl_vars['DFlightTime']->value;?>
+"
           />
           <input
             type="hidden"
             id="RFlightNo"
             name="RFlightNo"
-            value="{$RFlightNo}"
+            value="<?php echo $_smarty_tpl->tpl_vars['RFlightNo']->value;?>
+"
           />
           <input type="hidden" id="RFlightCo" name="RFlightCo" value="" />
           <input
             type="hidden"
             id="RFlightTime"
             name="RFlightTime"
-            value="{$RFlightTime}"
+            value="<?php echo $_smarty_tpl->tpl_vars['RFlightTime']->value;?>
+"
           />
           <input
             type="hidden"
             id="RDFlightNo"
             name="RDFlightNo"
-            value="{$RDFlightNo}"
+            value="<?php echo $_smarty_tpl->tpl_vars['RDFlightNo']->value;?>
+"
           />
           <input type="hidden" id="RDFlightCo" name="RDFlightCo" value="" />
           <input
             type="hidden"
             id="RDFlightTime"
             name="RDFlightTime"
-            value="{$RDFlightTime}"
+            value="<?php echo $_smarty_tpl->tpl_vars['RDFlightTime']->value;?>
+"
           />
 
           <input id="SPAddressHotel" name="SPAddressHotel" type="hidden" />
@@ -431,25 +525,29 @@
             id="PickupAddress"
             name="PickupAddress"
             type="hidden"
-            value="{$PickupAddress}"
+            value="<?php echo $_smarty_tpl->tpl_vars['PickupAddress']->value;?>
+"
           />
           <input
             id="DropAddress"
             name="DropAddress"
             type="hidden"
-            value="{$DropAddress}"
+            value="<?php echo $_smarty_tpl->tpl_vars['DropAddress']->value;?>
+"
           />
           <input
             id="RPickupAddress"
             name="RPickupAddress"
             type="hidden"
-            value="{$RPickupAddress}"
+            value="<?php echo $_smarty_tpl->tpl_vars['RPickupAddress']->value;?>
+"
           />
           <input
             id="RDropAddress"
             name="RDropAddress"
             type="hidden"
-            value="{$RDropAddress}"
+            value="<?php echo $_smarty_tpl->tpl_vars['RDropAddress']->value;?>
+"
           />
         </form>
         <!-- booking form -->
@@ -464,9 +562,12 @@
   <br />&nbsp;
 </div>
 <!-- background div -->
-<script src="./js/ztest.js"></script>
+<?php echo '<script'; ?>
+ src="./js/ztest.js"><?php echo '</script'; ?>
+>
 
-<script>
+<?php echo '<script'; ?>
+>
 
 	function selectJSON() {
 		$('#wref').empty();
@@ -613,7 +714,9 @@
 				}
 		});
 	});
-</script>
+<?php echo '</script'; ?>
+>
 
-{include file="plugins/BookingAdmin/templates/bookingAdminJS.tpl"}
-{include file="plugins/BookingAdmin/templates/bookingJS.tpl"}
+<?php $_smarty_tpl->_subTemplateRender("file:plugins/BookingAdmin/templates/BookingAdminJS.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+}
+}

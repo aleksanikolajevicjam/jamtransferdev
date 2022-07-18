@@ -1,4 +1,3 @@
-
 <? 
 /*
 	Dependencies: 
@@ -7,21 +6,32 @@
 */
 	error_reporting(E_PARSE);
 	@session_start();
-	//require_once ROOT . '/f/f.php';
-require_once '../config.php';
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/f/f.php';
 
 	// LANGUAGES
-	
+	if ( isset($_SESSION['CMSLang']) and $_SESSION['CMSLang'] != '') {
+		$languageFile = $_SERVER['DOCUMENT_ROOT'].'/lng/' . $_SESSION['CMSLang'] . '_text.php';
+		if ( file_exists( $languageFile) ) require_once $languageFile;
+		else {
+			$_SESSION['CMSLang'] = 'en';
+			require_once $_SERVER['DOCUMENT_ROOT'].'/lng/en.php';
+		}
+	}
+	else {
+		$_SESSION['CMSLang'] = 'en';
+		require_once $_SERVER['DOCUMENT_ROOT'].'/lng/en.php';
+	}
 
-	
+	define("SITE_CODE", '2');
+	define("B", ' ');
+	define("BD", ': ');
+	define("NL", '<br>');
 	
 	
 	// priprema podataka o vozilima i vozacima
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/t/getCarsAdm.php';
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/m/getContractPrices.php';
 	
-	require_once ROOT . '/api/getCarsAdm.php';
-
-	//require_once ROOT . '/api/getContractPrices.php';
-
  	// prikaz Km i Duration route
 	$routeDetails = array();
 	$detailsDesc = '';
@@ -57,7 +67,7 @@ if (count($carsErrorMessage) == 0) {
 			$logo='';	
 			if ($_REQUEST['AgentID']>0) {
 				$AgentID=$_REQUEST['AgentID']; 
-				require_once ROOT . '/db/v4_AuthUsers.class.php';
+				require_once $_SERVER['DOCUMENT_ROOT'] . '/db/v4_AuthUsers.class.php';
 				$au = new v4_AuthUsers();
 				$au->getRow($AgentID);
 				$logo=$au->getImage();	 								
@@ -281,7 +291,7 @@ if (count($carsErrorMessage) == 0) {
 
 
 	<? if (SITE_CODE == '1') { ?>
-		<div style="display: none;" class="col s12  lgray center pad1em">
+		<div class="col s12  lgray center pad1em">
 				<div class="col s12 ucase">
 					<hr>
 						<h2 class="center"><?= DRIVERS_PROFILES ?></h2>
@@ -296,7 +306,7 @@ if (count($carsErrorMessage) == 0) {
 					<div id="ProfileButton" onclick="ShowDriverProfile('<?= $oid ?>')">
 					 	<div class="col s12 white shadow clickPanel pad1em">
 							<img class="roundImg carShadow" src="<?= $driverData['ProfileImage'] ?>"
-							 style="height:4em;width:4em;margin-right:1em"><br>
+							 style="height:4em;width:4em;xfloat:left;margin-right:1em"><br>
 							 <?= $driverData['Company']?> 
 						</div>
 					</div>
